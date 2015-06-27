@@ -97,9 +97,11 @@ public class ProjectModelSource {
      *                                       {@link ProjectModelRequest#getRepository()}.
      * @throws ProjectModelBuildingException if the {@link ProjectModelRequest#getRepository()} did not contain a valid
      *                                       model definition.
+     * @throws InterruptedException          if the process gets interrupted in the middle.
      */
     @NonNull
-    public ProjectModel submit(@NonNull ProjectModelRequest request) throws IOException, ProjectModelBuildingException {
+    public ProjectModel submit(@NonNull ProjectModelRequest request)
+    		throws IOException, ProjectModelBuildingException, InterruptedException {
         request.getClass(); // throw NPE if null
         IOException ioe = null;
         ProjectModelBuildingException pmbe = null;
