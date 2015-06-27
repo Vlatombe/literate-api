@@ -119,7 +119,8 @@ public class MarkdownProjectModelBuilder implements ProjectModelBuilder {
      * {@inheritDoc}
      */
     //@Override
-    public ProjectModel build(ProjectModelRequest request) throws IOException, ProjectModelBuildingException {
+    public ProjectModel build(ProjectModelRequest request)
+    		throws IOException, ProjectModelBuildingException, InterruptedException {
         for (String name : markerFiles(request.getBaseName())) {
             if (request.getRepository().isFile(name)) {
                 return new Parser(request).parseProjectModel(request.getRepository(), name);
@@ -238,9 +239,10 @@ public class MarkdownProjectModelBuilder implements ProjectModelBuilder {
          * @param filePath   the file to parse.
          * @return the model.
          * @throws IOException when things go wrong.
+         * @throws InterruptedException if the process gets interrupted in the middle. 
          */
         private ProjectModel parseProjectModel(ProjectRepository repository, String filePath)
-                throws IOException, ProjectModelValidationException {
+                throws IOException, ProjectModelValidationException, InterruptedException {
             InputStream stream = repository.get(filePath);
             try {
                 char[] chars = IOUtils.toCharArray(stream);

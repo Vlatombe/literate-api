@@ -46,8 +46,9 @@ public interface ProjectModelBuilder {
      * @return the model.
      * @throws IOException                   if things go wrong.
      * @throws ProjectModelBuildingException if the source repository does not yield a valid model.
+     * @throws InterruptedException          if the process gets interrupted in the middle. 
      */
-    ProjectModel build(ProjectModelRequest request) throws IOException, ProjectModelBuildingException;
+    ProjectModel build(ProjectModelRequest request) throws IOException, ProjectModelBuildingException, InterruptedException;
 
     /**
      * Returns the marker filename(s) that the model builder supports based on the supplied basename.

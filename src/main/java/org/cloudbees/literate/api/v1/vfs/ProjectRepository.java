@@ -40,8 +40,9 @@ public interface ProjectRepository {
      * @throws org.cloudbees.literate.api.v1.vfs.PathNotFoundException
      *                     if the specified path does not exist.
      * @throws IOException if there was a problem retrieving the contents.
+     * @throws InterruptedException if the process was interrupted during execution
      */
-    InputStream get(String filePath) throws PathNotFoundException, IOException;
+    InputStream get(String filePath) throws PathNotFoundException, IOException, InterruptedException;
 
     /**
      * Returns {@code true} if and only if the specified path corresponds to a file.

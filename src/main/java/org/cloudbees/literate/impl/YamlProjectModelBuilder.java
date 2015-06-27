@@ -60,7 +60,8 @@ public class YamlProjectModelBuilder implements ProjectModelBuilder {
      * {@inheritDoc}
      */
     //@Override
-    public ProjectModel build(ProjectModelRequest request) throws IOException, ProjectModelBuildingException {
+    public ProjectModel build(ProjectModelRequest request)
+    		throws IOException, ProjectModelBuildingException, InterruptedException {
         for (String name : markerFiles(request.getBaseName())) {
             if (request.getRepository().isFile(name)) {
                 return new Parser(request).parseProjectModel(request.getRepository(), name);
@@ -134,8 +135,10 @@ public class YamlProjectModelBuilder implements ProjectModelBuilder {
          *             the repository
          * @throws ProjectModelBuildingException in case the file contains an
          *             invalid model
+         * @throws InterruptedException if the process gets interrupted in the middle. 
          */
-        public ProjectModel parseProjectModel(ProjectRepository repository, String name) throws IOException, ProjectModelBuildingException {
+        public ProjectModel parseProjectModel(ProjectRepository repository, String name)
+        		throws IOException, ProjectModelBuildingException, InterruptedException {
             InputStream stream = repository.get(name);
             try {
                 Yaml yaml = new Yaml();
